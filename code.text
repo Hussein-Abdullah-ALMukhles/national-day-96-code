@@ -1,0 +1,110 @@
+# =========================================================
+# 📄 COPYRIGHT & OWNERSHIP
+# Developed & Designed by: Hussein AL Mokhles © 2026
+# Project: Saudi National Day 96 Celebration
+# Layout (Turtle)
+# All Rights Reserved.
+# =========================================================
+
+# 1. تثبيت الإضافة الخاصة بجوجل كولاب
+!pip install ColabTurtlePlus
+
+# 2. الكود الخالي من الأخطاء مع تصحيح تمرير الألوان والبروزات الداخلية
+from ColabTurtlePlus.Turtle import *
+
+# إعداد الشاشة والخلفية بلون الهوية الأخضر الداكن
+clearscreen()
+setup(650, 650)
+bgcolor("#002B1B")
+
+# إعداد الرسام الرئيسي
+t = Turtle()
+t.speed(10)
+t.width(2)
+
+# دالة مساعدة لرسم مربع ملون
+def draw_square(x, y, size, color_code):
+    t.penup()
+    t.goto(x, y)
+    t.setheading(0)
+    t.color(color_code)
+    t.pendown()
+    t.begin_fill()
+    for _ in range(4):
+        t.forward(size)
+        t.right(90)
+    t.end_fill()
+
+# --- أولاً: رسم الإطار المستطيل الخارجي المحكم ---
+t.penup()
+t.goto(-230, 110)
+t.color("#008F4C")
+t.pendown()
+t.width(4)
+for _ in range(2):
+    t.forward(460)
+    t.right(90)
+    t.forward(120)
+    t.right(90)
+
+# --- ثانياً: رسم البروزات الداخلية الصغيرة جداً (أشبه بالنقط المتراصة) ---
+dot_size = 5
+
+# نقاط متراصة أسفل الخط العلوي مباشرة من الداخل
+for x_pos in range(-220, 225, 10):
+    draw_square(x_pos, 103, dot_size, "#008F4C")
+
+# [تم التصحيح هنا] نقاط متراصة أعلى الخط السفلي مباشرة مع تمرير اللون الأخضر الصحيح
+for x_pos in range(-220, 225, 10):
+    draw_square(x_pos, -3, dot_size, "#008F4C")
+
+# -----
+sq_size = 12
+
+# النقوش اليسرى: شكل 
+for row in range(10):
+    for col in range(5):
+        if (row + col) % 2 == 0:
+            v_boundary = 4 - abs(row - 4.5)
+            if col <= v_boundary:
+                draw_square(-224 + (col * sq_size), 104 - (row * sq_size), sq_size, "#008F4C")
+
+# النقوش اليمنى: شكل V مفرغ نائم متبادل (يتجه لليسار < )
+for row in range(10):
+    for col in range(5):
+        if (row + col) % 2 == 0:
+            v_boundary = 4 - abs(row - 4.5)
+            if col <= v_boundary:
+                draw_square(212 - (col * sq_size), 104 - (row * sq_size), sq_size, "#008F4C")
+
+
+# --- رابعاً: كتابة النصوص والعبارات الرسمية ---
+
+# 1. عبارة الهوية الرئيسية داخل الإطار
+t.penup()
+t.goto(0, 30)
+t.color("#FFFFFF")
+t.write("عِزّنَا بِطَبْعِنَا", align="center", font=("Arial", 36, "bold"))
+
+# 2. عبارة (اليوم الوطني السعودي 96 ) أسفل الإطار
+t.penup()
+t.goto(0, -45)
+t.color("#FFFFFF")
+t.write(" 96 اليوم الوطني السعودي", align="center", font=("Arial", 22, "bold"))
+
+# 3. تباعد الكلمات بالإنجليزية بشكل متزن
+t.penup()
+t.goto(0, -85)
+t.color("#FFFFFF")
+t.write("SAUDI    NATIONAL    DAY 96 ", align="center", font=("Arial", 12, "bold"))
+
+
+# 4. اسم 
+t.penup()
+t.goto(0, -195)
+t.color("#FFFFFF")
+t.write("برمجة وتصميم: حسين آل مخلص", align="center", font=("Arial", 15, "bold"))
+
+
+# إخفاء السلحفاة بعد الانتهاء
+t.hideturtle()
